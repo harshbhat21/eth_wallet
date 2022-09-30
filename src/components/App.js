@@ -27,7 +27,7 @@ class App extends Component {
     const web3 = window.web3
     const accounts = await web3.eth.getAccounts()
     this.setState({ account: accounts[0] })
-    const daiTokenAddress = "0x7b729B07EcBDEd8879Acf997aAF6546926982830" // Replace DAI Address Here
+    const daiTokenAddress = "0x86f6ACA961DB6a06D20Ef4FCF5b183e6cD27BD6C" // Replace DAI Address Here
     const daiTokenMock = new web3.eth.Contract(DaiTokenMock.abi, daiTokenAddress)
     this.setState({ daiTokenMock: daiTokenMock })
     const balance = await daiTokenMock.methods.balanceOf(this.state.account).call()
@@ -35,6 +35,8 @@ class App extends Component {
     const transactions = await daiTokenMock.getPastEvents('Transfer', { fromBlock: 0, toBlock: 'latest', filter: { from: this.state.account } })
     this.setState({ transactions: transactions })
     console.log(transactions)
+    console.log(this.state.account)
+    console.log(balance)
   }
 
   transfer(recipient, amount) {
@@ -59,25 +61,25 @@ class App extends Component {
         <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
           <a
             className="navbar-brand col-sm-3 col-md-2 mr-0"
-            href="http://www.dappuniversity.com/bootcamp"
+            href="#"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Dapp University
+            Dbanking
           </a>
         </nav>
         <div className="container-fluid mt-5">
           <div className="row">
             <main role="main" className="col-lg-12 d-flex text-center">
               <div className="content mr-auto ml-auto" style={{ width: "500px" }}>
-                <a
+                {/* <a
                   href="http://www.dappuniversity.com/bootcamp"
                   target="_blank"
                   rel="noopener noreferrer"
-                >
+                > */}
                   <img src={daiLogo} width="150" />
-                </a>
-                <h1>{this.state.balance} DAI</h1>
+                {/* </a> */}
+                <h1>{this.state.balance} INR</h1>
                 <form onSubmit={(event) => {
                   event.preventDefault()
                   const recipient = this.recipient.value
